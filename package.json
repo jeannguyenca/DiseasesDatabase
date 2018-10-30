@@ -1,0 +1,8 @@
+{
+  "name": "healthgram",
+  "version": "1.0.0",
+  "description": "A web application for travellers to prepare themselves for portential diseases and allergies in their destination.",
+  "main": "index.js",
+  "author": "Red Team",
+  "license": "MIT"
+}
