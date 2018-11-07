@@ -1,14 +1,15 @@
 {
   "name": "healthgram",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web application for travellers to prepare themselves for portential diseases and allergies in their destination.",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server.js",
     "start:server": "cd backend && nodemon server.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && npm start",
-    "start:dev": "concurrently \"npm run start:server\" \"npm run start:client\""
+    "start:dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Red Team",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "mongoose": "^5.3.8",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.5",
+    "path": "^0.12.7",
     "request": "^2.88.0"
   }
 }
