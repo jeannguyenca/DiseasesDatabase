@@ -116,21 +116,27 @@ router.get("/databases/:country", (req, res) => {
 
 });
 
+router.get("/databases", (req, res) => {
+  res.json({ success: false, error: "No data found" });
+})
+
 function populateArray(inputArray, disease, array){
   inputArray[disease].forEach(ele => {
     let atYear = parseInt(ele["dim"]["YEAR"]);
     let value = parseInt(ele["Value"]);
-    let yearValue = { year: atYear, cases: value };
-
-    array.push(yearValue);
-    array.sort(function(a, b) {
-      var aNum = a["year"];
-      var bNum = b["year"];
-      return aNum - bNum;
-    });
-
-  });
+    let yearValue = [];
+    if(value != 0){
+      yearValue = { year: atYear, cases: value };
+      array.push(yearValue);
+      array.sort(function(a, b) {
+        var aNum = a["year"];
+        var bNum = b["year"];
+        return aNum - bNum;
+      });
+    }
+  })
 }  
+
 
 
 // Use our router configuration when we call /api
