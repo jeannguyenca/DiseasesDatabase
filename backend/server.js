@@ -2,6 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
 import { getSecret } from "./secret";
+
+// const express = require("express");
+// const bodyParser = require("body-parser");
+// const logger = require("morgan");
+// const {getSecret} = require("./secret");
+
 const MongoClient = require("mongodb").MongoClient;
 const path = require('path');
 
@@ -24,15 +30,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-//server static production
-if(process.env.NODE_ENV === 'production'){
-  //set a static folder
-  app.use(express.static('client/public'));
-
-  app.get('*', (req,res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
-  });
-}
 
 // now we can set the route path & initialize the API
 router.get('/', (req, res) => {
@@ -148,9 +145,13 @@ function populateArray(inputArray, disease, array){
   })
 }  
 
-
+//public 
+const publicPath = path.resolve(__dirname, "..", "public");
+app.use(express.static(publicPath));
 
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+app.listen(API_PORT, () =>
+ console.log(`MERN HealthGram listening on port 3001 and looking in folder ${publicPath}`
+));
