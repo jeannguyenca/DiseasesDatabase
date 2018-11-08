@@ -24,7 +24,7 @@ MongoClient.connect(getSecret("dbUri"), { useNewUrlParser: true } , function (er
 });
 
 // set our port to either a predetermined port number if you have set it up, or 3001
-const API_PORT = process.env.API_PORT || 3001;
+const API_PORT = process.env.API_PORT || 5000;
 // now we should configure the API to use bodyParser and look for JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -152,6 +152,6 @@ app.use(express.static(publicPath));
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-app.listen(5000, () =>
-  console.log(`MERN HealthGram listening on port 8080 and looking in folder ${publicPath}`
+app.listen(API_PORT, () =>
+  console.log(`MERN HealthGram listening on port ${API_PORT} and looking in folder ${publicPath}`
 ));
