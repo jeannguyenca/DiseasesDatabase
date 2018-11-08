@@ -152,6 +152,6 @@ app.use(express.static(publicPath));
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-app.listen(8080, () =>
+app.listen(5000, () =>
   console.log(`MERN HealthGram listening on port 8080 and looking in folder ${publicPath}`
 ));
