@@ -10,7 +10,7 @@
     "start:server": "cd backend && nodemon server.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && npm start",
     "start:dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postbuild": "webpack --mode development"
   },
   "engines": {
     "node": "10.7.0"
