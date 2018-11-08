@@ -153,5 +153,5 @@ app.use(express.static(publicPath));
 app.use('/api', router);
 
 app.listen(API_PORT, () =>
- console.log(`MERN HealthGram listening on port 3001 and looking in folder ${publicPath}`
+  console.log(`MERN HealthGram listening on port ${API_PORT} and looking in folder ${publicPath}`
 ));
