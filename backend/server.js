@@ -151,16 +151,24 @@ function populateArray(inputArray, disease, array){
 
 // if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("public"));
+  // app.use(express.static("public"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"));
-  });
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  // });
 // }
+
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-app.listen(API_PORT, () =>
-  console.log(`MERN HealthGram listening on port ${API_PORT} and looking in folder`
-));
+// app.listen(API_PORT, () =>
+//   console.log(`MERN HealthGram listening on port ${API_PORT} and looking in folder`
+// ));
+
+var server = app.listen(process.env.PORT || 5000, function() {
+  var port = server.address().port;
+  console.log("Express is working on port " + port);
+});
