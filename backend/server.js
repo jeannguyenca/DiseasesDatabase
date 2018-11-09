@@ -149,14 +149,14 @@ function populateArray(inputArray, disease, array){
 // const publicPath = path.resolve(__dirname, "public");
 // app.use(express.static(publicPath));
 
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("public"));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "public", "index.html"));
   });
-}
+// }
 
 // Use our router configuration when we call /api
 app.use('/api', router);
