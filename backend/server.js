@@ -159,7 +159,7 @@ function populateArray(inputArray, disease, array){
 // }
 
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Use our router configuration when we call /api
 app.use('/api', router);
