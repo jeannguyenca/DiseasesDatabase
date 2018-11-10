@@ -29,17 +29,16 @@ class Planner extends Component {
 
   render() {
     return <div className="container">
-    <div className="form">
-        <form onSubmit={this.handleSubmit}>
-          <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
-          <button>Submit</button>
-        </form>
-    </div>
-    <div className="map">
-        <AnimatedMap country={this.state.value}></AnimatedMap>
-    </div>
-      {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value}></ChartContainer>: ''}
-      
+        <div className="form">
+          <form onSubmit={this.handleSubmit}>
+            <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
+            <button>Submit</button>
+          </form>
+        </div>
+        <div className="map">
+          <AnimatedMap country={this.state.value} />
+        </div>
+        {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value} /> : ""}
       </div>;
   }
 }

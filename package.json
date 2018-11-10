@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node backend/server.js",
     "prestart2": "webpack --mode development",
-    "start:server": "cd backend && nodemon server.js --exec babel-node --presets es2015,stage-0",
+    "start:server": "cd backend && nodemon server.js --exec babel-node --presets stage-0",
     "start:client": "cd client && npm start",
     "start:dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "heroku-postbuild": "webpack -d"
@@ -15,14 +15,12 @@
   "author": "Red Team",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.6.1",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.11",
     "mongo-client": "^0.2.1",
     "mongodb": "^3.1.8",
-    "mongoose": "^5.3.8",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.5",
     "path": "^0.12.7",
@@ -50,8 +48,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-cli": "^3.0.8"
   },
   "keywords": [
     "health",
