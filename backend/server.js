@@ -22,6 +22,7 @@ MongoClient.connect(getSecret("dbUri"), { useNewUrlParser: true } , function (er
 router.get("/databases/:country", (req, res) => {
   let finalResult = [];
   let diseases = [];
+  let diseaseNames = [];
 
   const { country } = req.params;
   const year = (new Date().getFullYear() - 4).toString();
@@ -31,14 +32,19 @@ router.get("/databases/:country", (req, res) => {
     if (err) {
       res.json({ success: false, error: err });
     }
-    diseases = Object.keys(result['0']).splice(2);
+    diseaseNames = Object.keys(result['0']).splice(2);
 
-    for(var i = 0; i < diseases.length; i++){
-      // console.log(result['0'][diseases[i]]);
-      // console.log(populateArray(result['0'], diseases[i]));
+    for (var i = 0; i < diseaseNames.length; i++){
+      if (result['0'][diseaseNames[i]].length !== 0){
+        let disease = result["0"]["diseases"][diseaseNames[i]];
+        diseases.push(disease);
+      }
+    }
+    finalResult.push(diseases);
 
+    for (var i = 0; i < diseaseNames.length; i++){
       //add arrays of diseases into the final array
-      finalResult.push(populateArray(result["0"], diseases[i]));
+      finalResult.push(populateArray(result["0"], diseaseNames[i]));
     }
     //send final array
     return res.json({ success: true, data: finalResult });

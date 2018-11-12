@@ -28,7 +28,7 @@ class Planner extends Component {
  }
 
   render() {
-    return <div className="container">
+    return <div className="container-fluid">
         <div className="form">
           <form onSubmit={this.handleSubmit}>
             <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
