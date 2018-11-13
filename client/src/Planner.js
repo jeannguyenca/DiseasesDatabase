@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AnimatedMap from "./components/SimpleMap";
 import ChartContainer from "./ChartContainer";
+import Gauge from "./components/Gauge";
 // import AutoSuggest from "./components/AutoSuggest";
 
 
@@ -34,6 +35,9 @@ class Planner extends Component {
             <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
             <button>Submit</button>
           </form>
+        </div>
+        <div className="gauge">
+          <Gauge></Gauge>
         </div>
         <div className="map">
           <AnimatedMap country={this.state.value} />

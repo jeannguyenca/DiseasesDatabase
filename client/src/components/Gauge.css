@@ -1,0 +1,3 @@
+.gauge svg path:first-of-type{
+  stroke-linecap:round
+}
