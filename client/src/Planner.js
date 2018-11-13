@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import AnimatedMap from "./components/SimpleMap";
+// import AnimatedMap from "./components/SimpleMap";
 import ChartContainer from "./ChartContainer";
+import MapHandle from "./components/MapHandle";
+import Weather from "./components/Weather";
 // import AutoSuggest from "./components/AutoSuggest";
 
 
@@ -35,10 +37,13 @@ class Planner extends Component {
             <button>Submit</button>
           </form>
         </div>
-        <div className="map">
-          <AnimatedMap country={this.state.value} />
-        </div>
+        {/* <AnimatedMap country={this.state.value} /> */}
+        {/* Map component */}
+        <MapHandle country={this.state.value} />
+        {/* Chart component */}
         {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value} /> : ""}
+        {/* Weather component */}
+        {this.state.showData ? <Weather show={this.state.showData} country={this.state.value} /> : ""}
       </div>;
   }
 }

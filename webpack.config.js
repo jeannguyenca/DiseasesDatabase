@@ -1,6 +1,7 @@
 const path = require('path');
 const entryFile = path.resolve(__dirname, 'client', 'src', 'index.js');
 const outputDir = path.resolve(__dirname, 'public');
+
 module.exports = {
   entry: [entryFile],
   output: {
@@ -29,5 +30,10 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty' 
+  },
 };

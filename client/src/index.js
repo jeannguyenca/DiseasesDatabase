@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import "bootstrap/dist/css/bootstrap.min.css";
+import './style/custom.scss';
+// import "bootstrap/dist/css/bootstrap.min.css";
 
-// import ChartContainer from './ChartContainer';
 import Planner from './Planner';
 import * as serviceWorker from './serviceWorker';
 
 if (!global._babelPolyfill) {
  require('babel-polyfill');
 }
-// ReactDOM.render(<ChartContainer />, document.getElementById('root'));
 ReactDOM.render(<Planner />, document.getElementById("root"));
 
 
