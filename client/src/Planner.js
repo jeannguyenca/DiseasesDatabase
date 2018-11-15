@@ -4,7 +4,7 @@ import ChartContainer from "./components/ChartContainer";
 import MapHandle from "./components/MapHandle";
 import Weather from "./components/Weather";
 import AirQuality from "./components/AirQuality";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 // import AutoSuggest from "./components/AutoSuggest";
 
 
@@ -47,9 +47,9 @@ class Planner extends Component {
             {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value} /> : ""}
           <Row className="airContainter">
             {/* Air Quality */}
-            {/* {this.state.showData ? <AirQuality show={this.state.showData} country={this.state.value} /> : ""} */}
+            {this.state.showData ? <AirQuality show={this.state.showData} country={this.state.value} /> : ""}
             {/* Weather component */}
-              {/* {this.state.showData ? <Weather show={this.state.showData} country={this.state.value} /> : ""} */}
+              {this.state.showData ? <Weather show={this.state.showData} country={this.state.value} /> : ""}
           </Row>
         </Container>
       </div>;
