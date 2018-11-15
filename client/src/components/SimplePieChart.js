@@ -1,4 +1,4 @@
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'Recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import React from "react";
 
 // const data = [
