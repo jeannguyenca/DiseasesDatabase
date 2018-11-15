@@ -1,6 +1,9 @@
 {
   "name": "healthgram",
   "version": "1.0.2",
+    "engines": {
+      "node": "10.3.0"
+    },
   "description": "A web application for travellers to prepare themselves for portential diseases and allergies in their destination.",
   "main": "backend/server.js",
   "scripts": {
