@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import AirQualityPieChart from "./SimplePieChart";
+import { Col } from "reactstrap";
 
 // import SimplePieChart from "./SimplePieChart";
 
@@ -64,11 +65,19 @@ class AirQuality extends React.Component {
 
   render() {
 
-   return <div className="pie" style={{ height: "300px" }}>
-       {this.state.loaded 
-       && <AirQualityPieChart aqius={this.state.aqius} />
-          }
-        </div>;
+   return <React.Fragment>
+      <Col xs="12">
+        <h3>Air Quality and Weather Forecast</h3>
+      </Col>
+      <Col sm="12" md={{size: 4, offset: 1}} className="airQualityContainer">
+           {this.state.loaded && (
+           <React.Fragment>
+              <AirQualityPieChart aqius={this.state.aqius} />
+              <span>{this.state.aqius}</span>
+             </React.Fragment>
+           )}
+      </Col>
+     </React.Fragment>;
   }
 }
 

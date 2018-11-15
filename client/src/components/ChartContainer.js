@@ -1,22 +1,17 @@
 import React, { Component } from "react";
 import SimpleLineChart from './LineChart';
+import DiseaseSuggestions from "./DiseaseSuggestions";
 import "whatwg-fetch";
 import Buttons from './Buttons';
+import { Row, Col } from "reactstrap";
 
 class ChartContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      selectedOption: "",
-      default: [
-        { year: "2016", cases: 0 },
-        { year: "2017", cases: 0 },
-        { year: "2018", cases: 0 }
-      ]
-    };
+      selectedOption:""
+    }
 
-    this.dataHandle = this.dataHandle.bind(this);
     this.loadDataFromServer = this.loadDataFromServer.bind(this);
     this.buttonHandle = this.buttonHandle.bind(this);
   }
@@ -37,18 +32,6 @@ class ChartContainer extends Component {
     }
   }
 
-  dataHandle() {
-    if (this.state.selectedOption !== "") {
-      return <React.Fragment>
-          <SimpleLineChart data={this.state[this.state.selectedOption]} />
-          <form>
-            <Buttons diseases={this.state.diseases} buttonHandle={this.buttonHandle} selectedOption={this.state.selectedOption} />
-          </form>
-        </React.Fragment>;
-    } else return <SimpleLineChart data={this.state.default} />;
-
-  }
-
   buttonHandle(selectedOption) {
     this.setState({ selectedOption:selectedOption });
   }
@@ -64,20 +47,23 @@ class ChartContainer extends Component {
       .then(res => {
         if (!res.success) this.setState({ error: res.error });
         else {
-          this.setState({diseases: res.data[0]});
-          for (let i = 1; i < res.data.length; i++) {
-            const newState = { ...this.state };
-            let isDefault = true;
-            newState[res.data[i][0].name] = res.data[i].slice(1);
-            this.setState(newState);
+          //diseases info
+          this.setState({ diseases: res.data[res.data.length-1]});
 
+          //disease values
+          let isDefault = true;
+          for (let i = 0; i < res.data.length-1; i++) {
+            const newState = { ...this.state };
+            if (res.data[i].length > 1){
+              newState[res.data[i][0].name] = res.data[i].slice(1);
+              this.setState(newState);
+            }
+            
             if (isDefault) {
-              if (this.state[res.data[i][0].name].length !== 0) {
-                this.setState({
-                  selectedOption: res.data[i][0].name
-                });
-                isDefault = false;
-              }
+              this.setState({
+                selectedOption: res.data[i][0].name
+              });
+              isDefault = false;
             }
           }
         }
@@ -85,9 +71,28 @@ class ChartContainer extends Component {
   };
 
   render() {
-    return <div className="chart" style={{ height: "300px" }}>
-        {this.dataHandle()}
-      </div>;
+    return <React.Fragment>
+        {this.state.selectedOption !== "" && <React.Fragment>
+            <Row className="chartContainter">
+              <Col xs="12">
+                {" "}
+                <h2>Did you know?</h2>{" "}
+              </Col>
+              <Col xs="12" className="chartDisplay">
+                <SimpleLineChart data={this.state[this.state.selectedOption]} />
+              </Col>
+              <Col xs={{ size: 10, offset: 1 }}>
+                <form>
+                  <h3>Click to see these diseases's trends</h3>
+                  <Buttons diseases={this.state.diseases} buttonHandle={this.buttonHandle} selectedOption={this.state.selectedOption} />
+                </form>
+              </Col>
+            </Row>
+            <Row>
+              <DiseaseSuggestions info={this.state.diseases[this.state.selectedOption]} />
+            </Row>
+          </React.Fragment>}
+      </React.Fragment>;
   }
 }
 

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import weather from "npm-openweathermap";
-
 import LiquidGauge from "./LiquidGauge";
+import { Col } from "reactstrap";
+
 
 class Weather extends Component {
  state = {
@@ -54,7 +55,8 @@ class Weather extends Component {
  }
 
  render(){
-  return <React.Fragment>
+   return <Col sm="12" md="6" className="weatherContainer">
+
       <LiquidGauge 
         id={"temperature"} 
         percentage={(this.state.temperature / 40) * 100} 
@@ -76,7 +78,7 @@ class Weather extends Component {
         unit={"m/s"} 
         startColor={"#6495ed"}
         endColor={"#dc143c"}/>
-    </React.Fragment>;
+   </Col>
  }
 }
 

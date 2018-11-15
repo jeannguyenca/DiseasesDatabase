@@ -26,12 +26,12 @@ class AirQualityPieChart extends React.Component{
     <Pie
      data={this.state.data}
      dataKey="value"
-     cx={420}
-     cy={200}
+     cx="140"
+     cy="70%"
      startAngle={180}
      endAngle={0}
-     innerRadius={40}
-     outerRadius={80}
+     innerRadius={100}
+     outerRadius={140}
      fill="#8884d8"
      paddingAngle={0}
     >

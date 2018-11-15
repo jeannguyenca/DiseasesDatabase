@@ -36,9 +36,8 @@ class LiquidGauge extends Component {
   ];
 
   return (
-   <div id={this.props.id}>
     <LiquidFillGauge
-     style={{ margin: '0 10px' }}
+     // style={{ margin: '0 10px' }}
      width={radius * 1.2}
      height={radius * 1.2}
      value= {Math.round(this.props.percentage)}
@@ -85,7 +84,6 @@ class LiquidGauge extends Component {
       fontFamily: 'Arial'
      }}
     />
-   </div>
   );
  }
 }

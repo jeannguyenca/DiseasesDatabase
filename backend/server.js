@@ -32,20 +32,28 @@ router.get("/databases/:country", (req, res) => {
     if (err) {
       res.json({ success: false, error: err });
     }
+    //array of all disease names
     diseaseNames = Object.keys(result['0']).splice(2);
 
-    for (var i = 0; i < diseaseNames.length; i++){
-      if (result['0'][diseaseNames[i]].length !== 0){
-        let disease = result["0"]["diseases"][diseaseNames[i]];
-        diseases.push(disease);
+    //array off all disease infos
+    diseases = result['0'].diseases;
+
+    //push data of each disease
+    for (let i = 0; i < diseaseNames.length; i++){
+      //add arrays of diseases into the final array
+      let array = populateArray(result["0"], diseaseNames[i]);
+
+      //push array with at least 1 data field (except name)
+      if(array.length > 1){
+        finalResult.push(array);
+      }else{
+        // console.log(diseases[diseaseNames[i]]);
+        delete diseases[diseaseNames[i]];
       }
     }
+
     finalResult.push(diseases);
 
-    for (var i = 0; i < diseaseNames.length; i++){
-      //add arrays of diseases into the final array
-      finalResult.push(populateArray(result["0"], diseaseNames[i]));
-    }
     //send final array
     return res.json({ success: true, data: finalResult });
     });

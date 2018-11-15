@@ -4,6 +4,7 @@ import ChartContainer from "./components/ChartContainer";
 import MapHandle from "./components/MapHandle";
 import Weather from "./components/Weather";
 import AirQuality from "./components/AirQuality";
+import { Container, Row, Col } from "reactstrap";
 // import AutoSuggest from "./components/AutoSuggest";
 
 
@@ -31,22 +32,26 @@ class Planner extends Component {
  }
 
   render() {
-    return <div className="container-fluid">
-        <div className="form">
-          <form onSubmit={this.handleSubmit}>
-            <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
-            <button>Submit</button>
-          </form>
-        </div>
-        {/* <AnimatedMap country={this.state.value} /> */}
-        {/* Map component */}
-        <MapHandle country={this.state.value} />
-        {/* Chart component */}
-        {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value} /> : ""}
-        {/* Air Quality */}
-        {this.state.showData ? <AirQuality show={this.state.showData} country={this.state.value} /> : ""}
-        {/* Weather component */}
-        {this.state.showData ? <Weather show={this.state.showData} country={this.state.value} /> : ""}
+    return <div className="container-fluid planner">
+          <Row className="mapContainer">
+            {/* Map component */}
+            <MapHandle country={this.state.value} />
+                <form onSubmit={this.handleSubmit}>
+                  <strong>Enter location name</strong><br/>
+                  <input ref={this.inputRef} type="text" onChange={this.onChangeText} />
+                  <button >Submit</button>
+                </form>
+          </Row>
+      <Container>
+            {/* Chart component */}
+            {this.state.showData ? <ChartContainer show={this.state.showData} country={this.state.value} /> : ""}
+          <Row className="airContainter">
+            {/* Air Quality */}
+            {/* {this.state.showData ? <AirQuality show={this.state.showData} country={this.state.value} /> : ""} */}
+            {/* Weather component */}
+              {/* {this.state.showData ? <Weather show={this.state.showData} country={this.state.value} /> : ""} */}
+          </Row>
+        </Container>
       </div>;
   }
 }
