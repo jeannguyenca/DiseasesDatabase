@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import AirQualityPieChart from "./SimplePieChart";
+import AirQualityPieChart from "../components/SimplePieChart";
 import { Col } from "reactstrap";
 
 // import SimplePieChart from "./SimplePieChart";

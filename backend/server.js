@@ -25,7 +25,7 @@ router.get("/databases/:country", (req, res) => {
   let diseaseNames = [];
 
   const { country } = req.params;
-  const year = (new Date().getFullYear() - 4).toString();
+  const year = (new Date().getFullYear() - 8).toString();
   
   getData(country, year, db).toArray((err, result) => {
     //read through records

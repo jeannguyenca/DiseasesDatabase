@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './style/custom.scss';
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import Planner from './Planner';
+import Planner from './containers/Planner';
 import * as serviceWorker from './serviceWorker';
 
 if (!global._babelPolyfill) {

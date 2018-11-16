@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import weather from "npm-openweathermap";
-import LiquidGauge from "./LiquidGauge";
+import LiquidGauge from "../components/LiquidGauge";
 import { Col } from "reactstrap";
 
 

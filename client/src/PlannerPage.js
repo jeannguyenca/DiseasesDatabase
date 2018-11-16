@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Planner from "./Planner";
+import Planner from "./containers/Planner";
 import { Button } from "reactstrap";
 
 class PlannerPage extends Component {

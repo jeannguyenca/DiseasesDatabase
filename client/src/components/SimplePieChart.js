@@ -17,6 +17,19 @@ class AirQualityPieChart extends React.Component{
     ]
    }
   }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.aquius !== prevProps.aquius) {
+      console.log("Changed");
+      this.setState(
+        {data: [
+          { name: 'Total', value: 300 },
+          { name: 'AqiUS', value: this.props.aqius }
+        ]}
+      );
+    }
+  }
   
 
  render() {

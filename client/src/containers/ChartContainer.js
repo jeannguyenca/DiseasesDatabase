@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import SimpleLineChart from './LineChart';
-import DiseaseSuggestions from "./DiseaseSuggestions";
+import SimpleLineChart from '../components/LineChart';
+import DiseaseSuggestions from "../components/DiseaseSuggestions";
 import "whatwg-fetch";
-import Buttons from './Buttons';
+import Buttons from "../components/Buttons";
 import { Row, Col } from "reactstrap";
 
 class ChartContainer extends Component {

@@ -4,12 +4,6 @@ import React, { Component } from 'react';
 import LiquidFillGauge from 'react-liquid-gauge';
 
 class LiquidGauge extends Component {
- state = {
-  value: 0
- };
- startColor = '#6495ed'; // cornflowerblue
- endColor = '#dc143c'; // crimson
-
  render() {
   const radius = 100;
   const interpolate = interpolateRgb(this.props.startColor, this.props.endColor);

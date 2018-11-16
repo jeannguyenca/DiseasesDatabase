@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import AnimatedMap from "./components/SimpleMap";
-import ChartContainer from "./components/ChartContainer";
-import MapHandle from "./components/MapHandle";
-import Weather from "./components/Weather";
-import AirQuality from "./components/AirQuality";
+import ChartContainer from "./ChartContainer";
+import MapHandle from "./MapHandle";
+import Weather from "./Weather";
+import AirQuality from "./AirQuality";
 import { Container, Row } from "reactstrap";
 // import AutoSuggest from "./components/AutoSuggest";
 
