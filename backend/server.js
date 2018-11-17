@@ -65,13 +65,13 @@ router.get("/databases/:country", (req, res) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, "..", "public")));
+// app.use(express.static(path.join(__dirname, "..", "public")));
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Hello, World!' });
-});
+// router.get('/', (req, res) => {
+//   res.json({ message: 'Hello, World!' });
+// });
 
 router.get("/databases", (req, res) => {
   res.json({ success: false, error: "No data found" });
@@ -79,5 +79,5 @@ router.get("/databases", (req, res) => {
 
 var server = app.listen(process.env.PORT || 5000, function() {
   var port = server.address().port;
-  console.log("Express is working on port " + port + " and looking for folder " + __dirname);
+  // console.log("Express is working on port " + port + " and looking for folder " + __dirname);
 });
