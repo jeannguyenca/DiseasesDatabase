@@ -5,7 +5,7 @@ export function populateArray(inputArray, disease) {
   let atYear = parseInt(ele["dim"]["YEAR"]);
   let value = parseInt(ele["Value"]);
   let yearValue = [];
-  if (value >= 10) {
+  if (value >= 50) {
     let duplicate = false;
     for(let i = 1; i < array.length; i++){
       // console.log(array[i].year);
