@@ -69,10 +69,18 @@ app.use(logger('dev'));
 // Use our router configuration when we call /api
 app.use('/api', router);
 
-// router.get('/', (req, res) => {
-//   res.json({ message: 'Hello, World!' });
-// });
-
+app.use(function (req, res, next) {
+  var allowedOrigins = ['lit-mesa-82577.herokuapp.com'];
+  var origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  return next();
+});
 router.get("/databases", (req, res) => {
   res.json({ success: false, error: "No data found" });
 })
