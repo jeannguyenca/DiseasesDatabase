@@ -3,21 +3,26 @@ import bodyParser from "body-parser";
 import logger from "morgan";
 import { getSecret } from "./secret";
 import { getData, populateArray } from "./getData";
+import cors from "cors";
 
 const MongoClient = require("mongodb").MongoClient;
-const path = require('path');
-
+const path = require("path");
 
 // and create our instances
 const app = express();
 const router = express.Router();
+app.use(cors());
 
 let db;
 
-MongoClient.connect(getSecret("dbUri"), { useNewUrlParser: true } , function (err, client) {
-  if (err) throw err;
-  db = client.db("who_database");
-});
+MongoClient.connect(
+  getSecret("dbUri"),
+  { useNewUrlParser: true },
+  function(err, client) {
+    if (err) throw err;
+    db = client.db("who_database");
+  }
+);
 
 router.get("/databases/:country", (req, res) => {
   let finalResult = [];
@@ -26,27 +31,27 @@ router.get("/databases/:country", (req, res) => {
 
   const { country } = req.params;
   const year = (new Date().getFullYear() - 8).toString();
-  
+
   getData(country, year, db).toArray((err, result) => {
     //read through records
     if (err) {
       res.json({ success: false, error: err });
     }
     //array of all disease names
-    diseaseNames = Object.keys(result['0']).splice(2);
+    diseaseNames = Object.keys(result["0"]).splice(2);
 
     //array off all disease infos
-    diseases = result['0'].diseases;
+    diseases = result["0"].diseases;
 
     //push data of each disease
-    for (let i = 0; i < diseaseNames.length; i++){
+    for (let i = 0; i < diseaseNames.length; i++) {
       //add arrays of diseases into the final array
       let array = populateArray(result["0"], diseaseNames[i]);
 
       //push array with at least 1 data field (except name)
-      if(array.length > 1){
+      if (array.length > 1) {
         finalResult.push(array);
-      }else{
+      } else {
         // console.log(diseases[diseaseNames[i]]);
         delete diseases[diseaseNames[i]];
       }
@@ -56,34 +61,21 @@ router.get("/databases/:country", (req, res) => {
 
     //send final array
     return res.json({ success: true, data: finalResult });
-    });
-
+  });
 });
 
 // set our port to either a predetermined port number if you have set it up, or 3001
 // now we should configure the API to use bodyParser and look for JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(logger('dev'));
+app.use(logger("dev"));
 // app.use(express.static(path.join(__dirname, "..", "public")));
 // Use our router configuration when we call /api
-app.use('/api', router);
+app.use("/api", router);
 
-app.use(function (req, res, next) {
-  var allowedOrigins = ['lit-mesa-82577.herokuapp.com'];
-  var origin = req.headers.origin;
-  if (allowedOrigins.indexOf(origin) > -1) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', true);
-  return next();
-});
 router.get("/databases", (req, res) => {
   res.json({ success: false, error: "No data found" });
-})
+});
 
 var server = app.listen(process.env.PORT || 5000, function() {
   var port = server.address().port;
