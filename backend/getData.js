@@ -1,86 +1,90 @@
 export function populateArray(inputArray, disease) {
- let array = [];
- array.push({ "name": disease });
- inputArray[disease].forEach(ele => {
-  let atYear = parseInt(ele["dim"]["YEAR"]);
-  let value = parseInt(ele["Value"]);
-  let yearValue = [];
-  if (value >= 50) {
-    let duplicate = false;
-    for(let i = 1; i < array.length; i++){
-      // console.log(array[i].year);
-      if (atYear === array[i].year){
-        array[i].cases += value;
-        duplicate = true;
+  let array = [];
+  array.push({ name: disease });
+  inputArray[disease].forEach(ele => {
+    let atYear = parseInt(ele["dim"]["YEAR"]);
+    let value = parseInt(ele["Value"]);
+    let yearValue = [];
+    if (value >= 50) {
+      let duplicate = false;
+      for (let i = 1; i < array.length; i++) {
+        // console.log(array[i].year);
+        if (atYear === array[i].year) {
+          array[i].cases += value;
+          duplicate = true;
+        }
+      }
+      if (!duplicate) {
+        yearValue = { year: atYear, cases: value };
+        array.push(yearValue);
       }
     }
-    if(!duplicate){
-      yearValue = { year: atYear, cases: value };
-      array.push(yearValue);
-    }
-  }
-   array.sort(function (a, b) {
-    var aNum = a["year"];
-    var bNum = b["year"];
-    return aNum - bNum;
-   });
+    array.sort(function(a, b) {
+      var aNum = a["year"];
+      var bNum = b["year"];
+      return aNum - bNum;
+    });
+  });
+  return array;
+}
 
- })
- return array;
-}  
-
-export function getData(country, year, db){
- //MongoDB query
- let data = db.collection("diseases")
-  .aggregate([
-   {
-    $lookup: {
-     from: "cho",
-     pipeline: [
-      {
-       $match: {
-        $and: [
-         { "dim.COUNTRY": country },
-         { "dim.YEAR": { $gte: year } }
-        ]
-       }
+export function getData(country, year, db) {
+  //MongoDB query
+  let data = db.collection("diseases").aggregate([
+    {
+      $lookup: {
+        from: "cho",
+        pipeline: [
+          {
+            $match: {
+              $and: [
+                //                  {                   "dim.COUNTRY": {                     $regex: country, $options: "i"                   }                 },
+                {
+                  "dim.COUNTRY": {
+                    $regex: country,
+                    $options: "i"
+                  }
+                },
+                { "dim.YEAR": { $gte: year } }
+              ]
+            }
+          }
+        ],
+        as: "cho"
       }
-     ],
-     as: "cho"
-    }
-   },
-   {
-    $lookup: {
-     from: "ntd",
-     pipeline: [
-      {
-       $match: {
-        $and: [
-         { "dim.COUNTRY": country },
-         { "dim.YEAR": { $gte: year } }
-        ]
-       }
+    },
+    {
+      $lookup: {
+        from: "ntd",
+        pipeline: [
+          {
+            $match: {
+              $and: [
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
+                { "dim.YEAR": { $gte: year } }
+              ]
+            }
+          }
+        ],
+        as: "ntd"
       }
-     ],
-     as: "ntd"
-    }
-   },
-   {
-    $lookup: {
-     from: "whs",
-     pipeline: [
-      {
-       $match: {
-        $and: [
-         { "dim.COUNTRY": country },
-         { "dim.YEAR": { $gte: year } }
-        ]
-       }
+    },
+    {
+      $lookup: {
+        from: "whs",
+        pipeline: [
+          {
+            $match: {
+              $and: [
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
+                { "dim.YEAR": { $gte: year } }
+              ]
+            }
+          }
+        ],
+        as: "whs"
       }
-     ],
-     as: "whs"
-    }
-   },
+    },
     {
       $lookup: {
         from: "dia",
@@ -88,7 +92,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -104,7 +108,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -120,7 +124,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -136,7 +140,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -152,7 +156,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -168,7 +172,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -184,7 +188,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -192,8 +196,7 @@ export function getData(country, year, db){
         ],
         as: "tub"
       }
-    ,
-  },
+    },
     {
       $lookup: {
         from: "yel",
@@ -201,7 +204,7 @@ export function getData(country, year, db){
           {
             $match: {
               $and: [
-                { "dim.COUNTRY": country },
+                { "dim.COUNTRY": { $regex: country, $options: "i" } },
                 { "dim.YEAR": { $gte: year } }
               ]
             }
@@ -210,10 +213,6 @@ export function getData(country, year, db){
         as: "yel"
       }
     }
-
   ]);
   return data;
 }
-
-
-
