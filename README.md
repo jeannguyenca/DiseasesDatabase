@@ -1,4 +1,4 @@
-# DiseasesDatabase
+# Common diseases database
 A database of common diseases using World Health Organization Database
 
 
